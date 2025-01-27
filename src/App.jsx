@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Task from "./components/Task";
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const taskTitles = ["Learn React", "Dah makan belom?", "Ya apalah di sini"];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Hello World! Welcome to our Task Manager :D 😎</h1>
+      <Task title="Learn React" />
+      <Task title="Dah makan belom?" />
+      <Task title="Ya apalah di sini" />
+
+      {/* <Task title={taskTitles[0]} />
+      <Task title={taskTitles[1]} />
+      <Task title={taskTitles[2]} /> */}
+
+      {/* {taskTitles.map((title, index) => (
+        <Task key={index} title={title} />
+      ))} */}
+    </div>
+  );
 }
 
-export default App
+export default App;
+
+
+//* Note:
+//* Kenapa bikin dan pake component?
+//* Bayangin kalo kita punya 100 task, dan tiap task punya 10 baris kode, trs lu satu" tulisin secara manual.
+//* Ya kan males bgt yak, 
+//* Blom lagi kl datanya dynamic/ganti", nanti harus ngubah satu" satu, gamungkin kan.
+//* Makanya kita bikin component, biar bisa reuseable, dan lebih rapih.
