@@ -16,7 +16,7 @@ function Task({ title }) {
   //   }
 
   return (
-    <div>
+    <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <span
         style={{
           textDecoration: isCompleted ? "line-through" : "none",
