@@ -16,16 +16,18 @@ function Task({ title }) {
   //   }
 
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <div className="w-full flex items-center justify-between gap-8">
       <span
         style={{
           textDecoration: isCompleted ? "line-through" : "none",
-          marginRight: "1rem",
         }}
       >
         {title}
       </span>
-      <button onClick={toggleCompletion}>
+      <button
+        className="bg-gray-900 text-white px-4 py-2 rounded-lg"
+        onClick={toggleCompletion}
+      >
         {isCompleted ? "Undo" : "Complete"}
       </button>
 

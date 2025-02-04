@@ -11,11 +11,11 @@ console.log(tasks);
 
 function RouteComponent() {
   return (
-    <div className="container">
-      <h2>Here are your tasks:</h2>
+    <div className="gap-6 w-screen min-h-screen flex flex-col justify-center items-center">
+      <h2 className="text-3xl font-bold">Here are your tasks:</h2>
       {/* <Task title="Buy groceries" /> */}
 
-      <div className="task-list">
+      <div className="flex flex-col gap-4">
         {tasks.map((task) => (
           <Task key={task.id} title={task.title} />
         ))}
