@@ -11,7 +11,7 @@ console.log(tasks);
 
 function RouteComponent() {
   return (
-    <div className="gap-6 w-screen min-h-screen flex flex-col justify-center items-center">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-6">
       <h2 className="text-3xl font-bold">Here are your tasks:</h2>
       {/* <Task title="Buy groceries" /> */}
 

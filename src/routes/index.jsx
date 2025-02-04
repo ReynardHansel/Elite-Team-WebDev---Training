@@ -5,12 +5,12 @@ import React from "react";
 
 function Home() {
   return (
-    <div className="w-screen min-h-screen gap-6 flex flex-col justify-center items-center">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-6">
       <h1 className="text-5xl font-bold">
         Hello World! Welcome to our Task Manager :D 😎
       </h1>
       <Link to="/tasklist">
-        <button className="task-btn text-2xl bg-gray-900 border border-black text-white px-6 py-4 rounded-lg">
+        <button className="task-btn rounded-lg border border-black bg-gray-900 px-6 py-4 text-2xl text-white">
           View Tasks
         </button>
       </Link>
