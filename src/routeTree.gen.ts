@@ -8,25 +8,13 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TasklistImport } from './routes/tasklist'
 import { Route as IndexImport } from './routes/index'
 
-// Create Virtual Routes
-
-const AddTaskLazyImport = createFileRoute('/AddTask')()
-
 // Create/Update Routes
-
-const AddTaskLazyRoute = AddTaskLazyImport.update({
-  id: '/AddTask',
-  path: '/AddTask',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/AddTask.lazy').then((d) => d.Route))
 
 const TasklistRoute = TasklistImport.update({
   id: '/tasklist',
@@ -58,13 +46,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasklistImport
       parentRoute: typeof rootRoute
     }
-    '/AddTask': {
-      id: '/AddTask'
-      path: '/AddTask'
-      fullPath: '/AddTask'
-      preLoaderRoute: typeof AddTaskLazyImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -73,41 +54,36 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/tasklist': typeof TasklistRoute
-  '/AddTask': typeof AddTaskLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/tasklist': typeof TasklistRoute
-  '/AddTask': typeof AddTaskLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/tasklist': typeof TasklistRoute
-  '/AddTask': typeof AddTaskLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tasklist' | '/AddTask'
+  fullPaths: '/' | '/tasklist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tasklist' | '/AddTask'
-  id: '__root__' | '/' | '/tasklist' | '/AddTask'
+  to: '/' | '/tasklist'
+  id: '__root__' | '/' | '/tasklist'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TasklistRoute: typeof TasklistRoute
-  AddTaskLazyRoute: typeof AddTaskLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TasklistRoute: TasklistRoute,
-  AddTaskLazyRoute: AddTaskLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -121,8 +97,7 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
-        "/tasklist",
-        "/AddTask"
+        "/tasklist"
       ]
     },
     "/": {
@@ -130,9 +105,6 @@ export const routeTree = rootRoute
     },
     "/tasklist": {
       "filePath": "tasklist.jsx"
-    },
-    "/AddTask": {
-      "filePath": "AddTask.lazy.jsx"
     }
   }
 }

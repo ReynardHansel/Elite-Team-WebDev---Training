@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Task({ title }) {
+function Task({ title, deadline }) {
   const [isCompleted, setIsCompleted] = useState(false);
 
   const toggleCompletion = () => {
@@ -24,6 +24,7 @@ function Task({ title }) {
       >
         {title}
       </span>
+      <span className="text-gray-500 text-sm">Due: {deadline}</span>
       <button
         className="rounded-lg bg-gray-900 px-4 py-2 text-white"
         onClick={toggleCompletion}

@@ -13,8 +13,8 @@ export const Route = createRootRoute({
         <Link to="/about" className="[&.active]:font-bold">
           About
         </Link>
-        <Link to="/AddTask" className="[&.active]:font-bold">
-          Add Task
+        <Link to="/tasklist" className="[&.active]:font-bold">
+          View / Add Task
         </Link>
       </nav>
       <hr />
