@@ -4,11 +4,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { toast } from "sonner";
+import { useContext } from "react";
+import { UserContext } from "@/routes/tasklist";
 
 export default function AddTask({ addTask }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const titleInputRef = useRef(null);
+
+  const user = useContext(UserContext);
+  console.log("User (from AddTask):", user);
 
   useEffect(() => {
     console.log("Title:", title);
