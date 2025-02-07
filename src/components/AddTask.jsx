@@ -2,11 +2,13 @@ import React from "react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRef } from "react";
 import { toast } from "sonner";
 
 export default function AddTask({ addTask }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const titleInputRef = useRef(null);
 
   useEffect(() => {
     console.log("Title:", title);
@@ -31,6 +33,9 @@ export default function AddTask({ addTask }) {
     console.log("Submitted");
     console.log("Title:", title);
     console.log("Date:", date);
+    setTitle("");
+    setDate("");
+    titleInputRef.current.focus();
   };
 
   return (
@@ -39,6 +44,7 @@ export default function AddTask({ addTask }) {
       <form onSubmit={handleSubmit}>
         <div className="flex gap-2">
           <input
+            ref={titleInputRef}
             type="text"
             value={title}
             className="flex-grow rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
