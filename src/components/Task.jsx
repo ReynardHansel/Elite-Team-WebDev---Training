@@ -1,13 +1,7 @@
-// import { UserContext } from "@/routes/tasklist";
 import React, { useState } from "react";
-// import { useContext } from "react";
 
 function Task({ title, deadline }) {
   const [isCompleted, setIsCompleted] = useState(false);
-
-  //? Data user gakan diterima krna ga termasuk di Wrapper/Provider
-  // const user = useContext(UserContext)
-  // console.log("User (from Task):", user);
 
   const toggleCompletion = () => {
     setIsCompleted(!isCompleted);
