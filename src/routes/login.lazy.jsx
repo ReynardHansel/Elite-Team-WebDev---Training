@@ -19,16 +19,6 @@ export const Route = createLazyFileRoute("/login")({
   component: RouteComponent,
 });
 
-async function googleLogin() {
-  try {
-    const result = await signInWithPopup(auth, gAuth);
-    const user = result.user;
-    console.log("User from google login:", user);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 function RouteComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,6 +40,19 @@ function RouteComponent() {
       const result = await signInWithEmailAndPassword(auth, email, password);
       const user = result.user;
       console.log("User from email sign in:", user);
+
+      toast.success("Logged in successfully!");
+      navigate({ to: "/" });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function googleLogin() {
+    try {
+      const result = await signInWithPopup(auth, gAuth);
+      const user = result.user;
+      console.log("User from google login:", user);
 
       toast.success("Logged in successfully!");
       navigate({ to: "/" });

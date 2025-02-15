@@ -1,4 +1,9 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createRootRoute,
+  Link,
+  Outlet,
+  useNavigate,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { auth } from "@/config/firebase";
 import { useState, useEffect } from "react";
@@ -6,14 +11,15 @@ import { useState, useEffect } from "react";
 import "../CSS/home.css";
 import { Button } from "@/components/ui/button";
 
-function handleSignOut() {
-  auth.signOut().then(() => {
-    window.location.reload();
-  });
-}
-
 function RootComponent() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  function handleSignOut() {
+    auth.signOut().then(() => {
+      navigate({ to: "/" });
+    });
+  }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
