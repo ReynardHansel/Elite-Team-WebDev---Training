@@ -8,13 +8,32 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TasklistImport } from './routes/tasklist'
 import { Route as IndexImport } from './routes/index'
 
+// Create Virtual Routes
+
+const SignupLazyImport = createFileRoute('/signup')()
+const LoginLazyImport = createFileRoute('/login')()
+
 // Create/Update Routes
+
+const SignupLazyRoute = SignupLazyImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
+
+const LoginLazyRoute = LoginLazyImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 
 const TasklistRoute = TasklistImport.update({
   id: '/tasklist',
@@ -46,6 +65,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasklistImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +87,46 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/tasklist': typeof TasklistRoute
+  '/login': typeof LoginLazyRoute
+  '/signup': typeof SignupLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/tasklist': typeof TasklistRoute
+  '/login': typeof LoginLazyRoute
+  '/signup': typeof SignupLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/tasklist': typeof TasklistRoute
+  '/login': typeof LoginLazyRoute
+  '/signup': typeof SignupLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tasklist'
+  fullPaths: '/' | '/tasklist' | '/login' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tasklist'
-  id: '__root__' | '/' | '/tasklist'
+  to: '/' | '/tasklist' | '/login' | '/signup'
+  id: '__root__' | '/' | '/tasklist' | '/login' | '/signup'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TasklistRoute: typeof TasklistRoute
+  LoginLazyRoute: typeof LoginLazyRoute
+  SignupLazyRoute: typeof SignupLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TasklistRoute: TasklistRoute,
+  LoginLazyRoute: LoginLazyRoute,
+  SignupLazyRoute: SignupLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +140,9 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
-        "/tasklist"
+        "/tasklist",
+        "/login",
+        "/signup"
       ]
     },
     "/": {
@@ -105,6 +150,12 @@ export const routeTree = rootRoute
     },
     "/tasklist": {
       "filePath": "tasklist.jsx"
+    },
+    "/login": {
+      "filePath": "login.lazy.jsx"
+    },
+    "/signup": {
+      "filePath": "signup.lazy.jsx"
     }
   }
 }
